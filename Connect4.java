@@ -41,17 +41,9 @@ public class Connect4 extends JComponent implements MouseListener {
 
         // Create new instance of Connect4AI
         opponent = new Connect4AI(MOVES_IN_ADVANCE, PLAYER_CHAR, AI_CHAR);
-        
+
         // Add the mouse listener
         addMouseListener(this);
-    }
-
-    /**
-     * Drops a token at a specified column
-     * @param col - The column specified
-     */
-    private void playMove(int col){
-        // STEP 4: Fill in the playMove method.
     }
 
     /**
