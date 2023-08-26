@@ -41,6 +41,9 @@ public class Connect4 extends JComponent implements MouseListener {
 
         // Create new instance of Connect4AI
         opponent = new Connect4AI(MOVES_IN_ADVANCE, PLAYER_CHAR, AI_CHAR);
+        
+        // Add the mouse listener
+        addMouseListener(this);
     }
 
     /**
@@ -80,6 +83,9 @@ public class Connect4 extends JComponent implements MouseListener {
 
         // REPLACE THIS WITH YOUR CODE
         System.out.println("You clicked (" + e.getX() + ", " + e.getY() + ")");
+
+        // Redraws the screen
+        repaint();
     }
 
     // Ignore these, they aren't important.
