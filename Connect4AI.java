@@ -66,4 +66,24 @@ public class Connect4AI {
             return val;
         }
     }
+
+    /**
+     * Use the minimax to determine the best column to make a move in.
+     * @return - The index of the column of which to make the move
+     */
+    public int decision(char[][] board){
+        // Make a copy of the board
+
+        // For all columns in the board, try dropping a token in that column.
+        for(int i = 0; i < board[0].length; i++){
+            // Make the move in boardCopy (NOT in board directly)
+            
+            // Get the minimax value
+            // Store the best minimax value so far and its corresponding column
+
+            // Undo the move in boardCopy (just set it as empty)
+        }
+        
+        return 0;
+    }
 }
