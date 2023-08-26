@@ -31,7 +31,7 @@ public class Connect4AI {
      * @return the value of the search
      */
     private int minimax(char[][] board, int depth, boolean maximizingPlayer){
-        // STEP 7: Implement minimax search based on board state.
+        // STEP 8: Implement minimax search based on board state.
 
 
         // If the game is over, return +100 if the AI won and -100 if the player won.
