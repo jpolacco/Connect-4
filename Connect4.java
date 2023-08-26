@@ -15,7 +15,7 @@ public class Connect4 extends JComponent implements MouseListener {
     private final int COLS = 7;
 
     // Colors used for the tokens the player and AI uses
-    private final Color USER_COL = new Color(255, 0, 0);
+    private final Color PLAYER_COL = new Color(255, 0, 0);
     private final Color AI_COL = new Color(255, 255, 0);
 
     // Board representation
