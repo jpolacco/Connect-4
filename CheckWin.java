@@ -28,4 +28,11 @@ public class CheckWin {
 
         return ' ';
     }
+
+
+    public static boolean boardIsFull(char[][] board){
+        // Check whether a board is full or not (used to determine draws)
+
+        return false;
+    }
 }
