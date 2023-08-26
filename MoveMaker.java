@@ -6,8 +6,8 @@
  */
 public class MoveMaker {
     // STEP 4: Fill in the MoveMaker class
-    
-    
+
+
     /**
      * Whether we can drop a token at a specified column
      * @param board - The board
