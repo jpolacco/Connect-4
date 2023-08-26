@@ -37,13 +37,16 @@ public class Connect4AI {
         // If the game is over, return +100 if the AI won and -100 if the player won.
         // If the depth is zero and the game is not over, return 0 (neutral).
 
-        // Create a deep copy of board state
         if(maximizingPlayer){
             int val = -100000;
 
+            // First, create a deep copy of the board (boardCopy)
+
             // For all columns in the board, try dropping a token in that column.
             for(int i = 0; i < board[0].length; i++){
-                // ...
+                // Make the move in boardCopy (NOT in board directly)
+                // Search with minimax
+                // Undo the move in boardCopy (just set it as empty)
             }
 
             return val;
@@ -51,9 +54,13 @@ public class Connect4AI {
         } else {
             int val = 100000;
 
+            // First, create a deep copy of the board (boardCopy)
+
             // For all columns in the board, try dropping a token in that column.
             for(int i = 0; i < board[0].length; i++){
-                // ...
+                // Make the move in boardCopy (NOT in board directly)
+                // Search with minimax
+                // Undo the move in boardCopy (just set it as empty)
             }
 
             return val;
