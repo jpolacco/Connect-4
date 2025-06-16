@@ -19,32 +19,44 @@ public class Connect4 extends JComponent implements MouseListener {
     private final Color AI_COL = new Color(255, 255, 0);
 
     // Board representation
-    // STEP 1: Choose characters to represent these three states (e.g. 'p' for player, 'a' for AI, ' ' for empty)
-    private final char PLAYER_CHAR = ' ';
-    private final char AI_CHAR = ' ';
-    private final char EMPTY_CHAR = ' ';
+    private char PLAYER_CHAR;
+    private char AI_CHAR;
+    private char EMPTY_CHAR;
 
     // Size of the squares that tokens are dropped into, in pixels.
     private final int SQUARE_SIZE = 80;
     public char board[][];
 
     // AI opponent
-    private final int MOVES_IN_ADVANCE = 5;
-    private Connect4AI opponent;
+    private Player opponent;
+
+    // Game over?
+    private boolean game_over = false;
 
     /**
      * A constructor to initialize the board and opponent AI.
      */
     public Connect4(){
-        // STEP 2: Initialize every element in your board as "empty."
-
-
         // Create new instance of Connect4AI
-        opponent = new Connect4AI(MOVES_IN_ADVANCE, PLAYER_CHAR, AI_CHAR);
+        opponent = new Player();
+        PLAYER_CHAR = opponent.OPP_TOKEN;
+        AI_CHAR = opponent.MY_TOKEN;
+        EMPTY_CHAR = opponent.EMPTY_TOKEN;
+
+        board = new char[ROWS][COLS];
+        for(int r = 0; r < ROWS; r++){
+            for(int c = 0; c < COLS; c++){
+                board[r][c] = EMPTY_CHAR;
+            }
+        }
 
         // Add the mouse listener
         addMouseListener(this);
     }
+
+    // To be used next time
+    public void mm(int col,char what_char){if(board[0][col]!=EMPTY_CHAR){System.out.println("Attempted to drop token in a full column");return;}int r=0;for(;r<ROWS;r++){if(board[r][col]!=EMPTY_CHAR)break;}board[r-1][col]=what_char;if(cw()==what_char){game_over=true;System.out.println("Game over - "+(what_char==AI_CHAR?"program":"you")+" won.");}if(cd()){game_over=true;System.out.println("Game over - draw.");}}private char cw(){for(int r=0;r<ROWS;r++){for(int c=0;c<COLS;c++){if(board[r][c]==EMPTY_CHAR)continue;if(c+3<COLS&&board[r][c]==board[r][c+1]&&board[r][c]==board[r][c+2]&&board[r][c]==board[r][c+3])return board[r][c];if(r+3<ROWS&&board[r][c]==board[r+1][c]&&board[r][c]==board[r+2][c]&&board[r][c]==board[r+3][c])return board[r][c];if(r+3<ROWS&&c+3<COLS&&board[r][c]==board[r+1][c+1]&&board[r][c]==board[r+2][c+2]&&board[r][c]==board[r+3][c+3])return board[r][c];if(r+3<ROWS&&c-3>=0&&board[r][c]==board[r+1][c-1]&&board[r][c]==board[r+2][c-2]&&board[r][c]==board[r+3][c-3])return board[r][c];}}return EMPTY_CHAR;}private boolean cd(){boolean draw=true;for(int c=0;c<COLS;c++){if(board[0][c]==EMPTY_CHAR)draw=false;}return draw;}
+
 
     /**
      * Everything meant to be painted on the window should go here.
@@ -52,14 +64,13 @@ public class Connect4 extends JComponent implements MouseListener {
     @Override
     public void paintComponent(Graphics g){
         // Display the board here.
-        for(int i = 0; i < ROWS; i++){
-            for(int j = 0; j < COLS; j++){
-                // STEP 3: Correctly display the contents of the board.
-                //         If the character matches PLAYER_CHAR, it should be colored PLAYER_COL.
-                //         Similarly, if the character matches AI_CHAR, it should be colored AI_COL.
+        for(int r = 0; r < ROWS; r++){
+            for(int c = 0; c < COLS; c++){
+                if(board[r][c] == PLAYER_CHAR) g.setColor(PLAYER_COL);
+                else if(board[r][c] == AI_CHAR) g.setColor(AI_COL);
+                else g.setColor(Color.GRAY);
 
-                g.setColor(Color.GRAY);
-                g.fillOval(j*SQUARE_SIZE, 80 + i*SQUARE_SIZE, SQUARE_SIZE - 8, SQUARE_SIZE - 8);
+                g.fillOval(c*SQUARE_SIZE, 80 + r*SQUARE_SIZE, SQUARE_SIZE - 8, SQUARE_SIZE - 8);
             }
         }
     }
@@ -70,11 +81,23 @@ public class Connect4 extends JComponent implements MouseListener {
      */
     @Override
     public void mouseClicked(MouseEvent e) {
-        // STEP 5: When the user clicks a column, their token should be dropped down to that column.
-        //         This can be handled with if/else-if/else statements, but other methods can be used as well.
+        if(game_over)
+            return;
 
-        // REPLACE THIS WITH YOUR CODE
-        System.out.println("You clicked (" + e.getX() + ", " + e.getY() + ")");
+
+        int col = e.getX()/SQUARE_SIZE;
+        if(col < 0 || col >= COLS) return;
+        
+        mm(col, PLAYER_CHAR);
+        repaint();
+
+        if(game_over) return;
+
+        // ====================================
+        
+        opponent.updateState(board);
+        int choice = opponent.returnMove();
+        mm(choice, AI_CHAR);
 
         // Redraws the screen
         repaint();
