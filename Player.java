@@ -1,14 +1,11 @@
 public class Player {
-    public String name = "";
-
     private char[][] board; // current board state
     private final int ROWS = 6;
     private final int COLS = 7;
-
-    // STEP 1: Choose characters you like.
-    public final char MY_TOKEN = ' ';
-    public final char OPP_TOKEN = ' ';
-    public final char EMPTY_TOKEN = ' ';
+    
+    public char MY_TOKEN = ' ';
+    public char OPP_TOKEN = ' ';
+    public char EMPTY_TOKEN = ' ';
     
     public Player(){
         // Set up a blank board
@@ -17,6 +14,11 @@ public class Player {
             for(int c = 0; c < COLS; c++)
                 board[r][c] = EMPTY_TOKEN;
         }
+    }
+
+    // Your name heres
+    public String getName(){
+        return "";
     }
 
     // Method to be overriden
