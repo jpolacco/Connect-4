@@ -1,7 +1,5 @@
 import javax.swing.*;
 
-import versions.basic_intelligence;
-
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -31,7 +29,7 @@ public class Connect4 extends JComponent implements MouseListener {
     public char board[][];
 
     // AI opponent
-    private basic_intelligence opponent;
+    private Player opponent;
 
     // Game over?
     private boolean game_over = false;
@@ -41,7 +39,7 @@ public class Connect4 extends JComponent implements MouseListener {
      */
     public Connect4(){
         // Create new instance of Connect4AI
-        opponent = new basic_intelligence();
+        opponent = new Player();
         PLAYER_CHAR = opponent.OPP_TOKEN;
         AI_CHAR = opponent.MY_TOKEN;
         EMPTY_CHAR = opponent.EMPTY_TOKEN;
@@ -98,7 +96,7 @@ public class Connect4 extends JComponent implements MouseListener {
 
         // ====================================
         
-        opponent.updateState(board);
+        opponent.updateState(board, AI_CHAR, PLAYER_CHAR, EMPTY_CHAR);
         int choice = opponent.returnMove();
         mm(choice, AI_CHAR);
 

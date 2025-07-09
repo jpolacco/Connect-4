@@ -1,29 +1,30 @@
+/**
+ * The AI used as the opponent in Connect 4. Uses minimax search to find moves.
+ *
+ * @author Gene Yang
+ * @version June 19, 2025
+ */
 public class Player {
     private char[][] board; // current board state
     private final int ROWS = 6;
     private final int COLS = 7;
-    
-    public char MY_TOKEN = ' ';
-    public char OPP_TOKEN = ' ';
+
+    public char MY_TOKEN = '@';
+    public char OPP_TOKEN = '!';
     public char EMPTY_TOKEN = ' ';
     
     public Player(){
-        // Set up a blank board
+        // Setup board
         board = new char[ROWS][COLS];
-        for(int r = 0; r < ROWS; r++){
-            for(int c = 0; c < COLS; c++)
-                board[r][c] = EMPTY_TOKEN;
-        }
     }
 
-    // Your name heres
     public String getName(){
         return "";
     }
 
     // Method to be overriden
     public int returnMove(){
-        return (int)(Math.random() * COLS);
+        return -1;
     }
 
 
@@ -32,11 +33,15 @@ public class Player {
     // ================================================================================
     
     // Updates board after move
-    public void updateState(char[][] board){
+    public void updateState(char[][] board, char my_token, char opp_token, char empty_token){
         for(int r = 0; r < ROWS; r++){
             for(int c = 0; c < COLS; c++)
                 this.board[r][c] = board[r][c];
         }
+
+        MY_TOKEN = my_token;
+        OPP_TOKEN = opp_token;
+        EMPTY_TOKEN = empty_token;
     }
     
     // For debugging
