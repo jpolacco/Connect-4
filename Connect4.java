@@ -90,15 +90,20 @@ public class Connect4 extends JComponent implements MouseListener {
         if(col < 0 || col >= COLS) return;
         
         mm(col, PLAYER_CHAR);
+        // FIX: added following line to update state after player's move
+        opponent.updateState(board, AI_CHAR, PLAYER_CHAR, EMPTY_CHAR);
+        
         repaint();
 
         if(game_over) return;
 
         // ====================================
         
-        opponent.updateState(board, AI_CHAR, PLAYER_CHAR, EMPTY_CHAR);
+        
         int choice = opponent.returnMove();
         mm(choice, AI_CHAR);
+        // FIX: moved following line after call to mm()
+        opponent.updateState(board, AI_CHAR, PLAYER_CHAR, EMPTY_CHAR);
 
         // Redraws the screen
         repaint();
@@ -110,3 +115,4 @@ public class Connect4 extends JComponent implements MouseListener {
     @Override public void mouseEntered(MouseEvent e) {}
     @Override public void mouseExited(MouseEvent e) {}
 }
+
