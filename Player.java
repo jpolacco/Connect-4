@@ -1,7 +1,7 @@
 /**
- * The AI used as the opponent in Connect 4. Uses minimax search to find moves.
+ * The AI used as the opponent in Connect 4. 
  *
- * @author Gene Yang
+ * @author Gene Yang (edited by Joe Polacco)
  * @version June 19, 2025
  */
 public class Player {
@@ -18,17 +18,24 @@ public class Player {
         board = new char[ROWS][COLS];
     }
 
+    // TODO: return your name
     public String getName(){
         return "";
     }
 
-    // Method to be overriden
+    /** TODO: the most important method you will write
+     *  (you will write and utilize other helper methods)
+     *  @return the column where the bot will make it's next move
+     *  it should first: 1. check for obvious wins by your bot and play that move
+     *  and then:        2. if no obvious winning move by your bot, block obvious wins by the human player
+     *  else:            3. play anywhere you want
+     */
     public int returnMove(){
-        return -1;
+        return -1; 
     }
 
 
-    // You can disregard anything down here
+    // You can disregard anything down here : printBoard() is very useful for debugging!
     // ================================================================================
     // ================================================================================
     
